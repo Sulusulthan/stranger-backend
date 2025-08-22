@@ -1,0 +1,20 @@
+{
+  "name": "stranger-backend",
+  "version": "1.0.0",
+  "description": "WebSocket signaling server for Stranger Chat",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ws": "^8.13.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
