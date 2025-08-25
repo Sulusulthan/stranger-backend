@@ -9,37 +9,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
-// Root route
-app.get("/", (req, res) => {
-  res.send("Stranger Chat backend is running ✅");
-});
-
-// 🔑 LiveKit Token API
-app.get("/get-token", (req, res) => {
-  try {
-    const at = new AccessToken(
-      process.env.LIVEKIT_API_KEY,
-      process.env.LIVEKIT_API_SECRET,
-      {
-        identity: "user-" + Math.random().toString(36).substring(7), // random user id
-      }
-    );
-
-    at.addGrant({ roomJoin: true, room: "stranger-room" });
-
-    const token = at.toJwt();
-    res.json({ token });
-  } catch (err) {
-    console.error("Token error:", err);
-    res.status(500).json({ error: "Could not create token" });
-  }
-});
-
-// ✅ Your existing WebSocket logic (for text messages)
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server, path: "/match" });
+const wss = new WebSocketServer({ server });
 
 let clients = [];
 wss.on("connection", (ws) => {
